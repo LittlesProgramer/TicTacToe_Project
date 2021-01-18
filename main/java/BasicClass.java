@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class Basic_Class {
+public class BasicClass {
     public static void main(String[] args){
         EventQueue.invokeLater(new Runnable() {
             @Override

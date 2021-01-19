@@ -5,14 +5,13 @@ import java.util.Map;
 
 public class GameLogicClass {
     private static GameFild.TicTacToeButtons moveUser = null;
-    private static boolean doSelectedPlayer = false;
+    private static boolean doSelectedCrossOrCircle = false;
 
-    public static void UserMove(boolean selectedPlayer){
-        doSelectedPlayer = selectedPlayer;
+    public static void UserMove(){
 
         for(Map.Entry<GameFild.TicTacToeButtons,Integer> el : GameFild.getButtonMap().entrySet()){
             el.getKey().addActionListener((action)->{
-                if(!doSelectedPlayer){
+                if(!doSelectedCrossOrCircle){
                     JOptionPane.showMessageDialog(null,"Proszê wybraæ kó³ko lub krzy¿yk");
                 }else {
                     System.out.println("id = " + el.getValue());
@@ -23,5 +22,9 @@ public class GameLogicClass {
                 }
             });
         }
+    }
+
+    public static void setDoSelectedCrossOrCircle(){
+        doSelectedCrossOrCircle = true;
     }
 }

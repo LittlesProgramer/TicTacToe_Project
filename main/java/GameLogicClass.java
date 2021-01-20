@@ -1,11 +1,10 @@
 import javax.swing.*;
-import java.awt.*;
-import java.awt.geom.Rectangle2D;
 import java.util.Map;
 
 public class GameLogicClass {
     private static GameFild.TicTacToeButtons moveUser = null;
     private static boolean doSelectedCrossOrCircle = false;
+    private static String selectedFigure = "";
 
     public static void UserMove(){
 
@@ -18,7 +17,7 @@ public class GameLogicClass {
                     moveUser = el.getKey();
                     moveUser.setEnabled(false);
                     moveUser.setOpaque(false);
-                    moveUser.drawingCircleOrCross("rect");
+                    moveUser.drawingCircleOrCross(selectedFigure);
                 }
             });
         }
@@ -26,5 +25,8 @@ public class GameLogicClass {
 
     public static void setDoSelectedCrossOrCircle(){
         doSelectedCrossOrCircle = true;
+    }
+    public static void whatFigureIsSelected(String figure){
+        GameLogicClass.selectedFigure = figure;
     }
 }

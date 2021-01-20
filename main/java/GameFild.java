@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.util.HashMap;
 import java.util.Map;
@@ -49,8 +50,10 @@ public class GameFild extends JFrame {
 
             if(crossOrCircle.getItemAt(crossOrCircle.getSelectedIndex()).equals("Cross")){
                 GameLogicClass.setDoSelectedCrossOrCircle();
+                GameLogicClass.whatFigureIsSelected("cross");
             }else{
                 GameLogicClass.setDoSelectedCrossOrCircle();
+                GameLogicClass.whatFigureIsSelected("circle");
             }
 
             crossOrCircle.setEnabled(false);
@@ -72,14 +75,17 @@ public class GameFild extends JFrame {
     //this is class TicTacToe which draw circle or cross according to the user's choice using the drawingCircleOrCross method
     class TicTacToeButtons extends JButton{
         private Rectangle2D rect2D = new Rectangle2D.Double(10,10,10,10);
+        private Ellipse2D elli2D = new Ellipse2D.Double(10,10,10,10);
         private String figure = null;
 
         public void paintComponent(Graphics g){
+            Graphics2D g2 = (Graphics2D) g;
             //System.out.println("paint");
             if(figure != null) {
-                if (figure.equals("rect")) {
-                    Graphics2D g2 = (Graphics2D) g;
+                if (figure.equals("cross")) {
                     g2.draw(rect2D);
+                }else if(figure.equals("circle")){
+                    g2.draw(elli2D);
                 }
             }else{
                 return;

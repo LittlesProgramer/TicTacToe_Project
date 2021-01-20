@@ -1,12 +1,12 @@
 import javax.swing.*;
 import java.util.Map;
 
-public class GameLogicClass {
+public class UserMoveClass {
     private static GameFild.TicTacToeButtons moveUser = null;
     private static boolean doSelectedCrossOrCircle = false;
     private static String selectedFigure = "";
 
-    public static void UserMove(){
+    public static void UserMove(JLabel whoseMoveIsNowLabel){
 
         for(Map.Entry<GameFild.TicTacToeButtons,Integer> el : GameFild.getButtonMap().entrySet()){
             el.getKey().addActionListener((action)->{
@@ -18,6 +18,9 @@ public class GameLogicClass {
                     moveUser.setEnabled(false);
                     moveUser.setOpaque(false);
                     moveUser.drawingCircleOrCross(selectedFigure);
+                    //class LogicClass checking on this moment you or yours oponent wined
+                    whoseMoveIsNowLabel.setText("Who move is now: "+"computer move");
+
                 }
             });
         }
@@ -27,6 +30,6 @@ public class GameLogicClass {
         doSelectedCrossOrCircle = true;
     }
     public static void whatFigureIsSelected(String figure){
-        GameLogicClass.selectedFigure = figure;
+        UserMoveClass.selectedFigure = figure;
     }
 }

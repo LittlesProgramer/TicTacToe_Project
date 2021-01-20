@@ -15,12 +15,12 @@ public class GameFild extends JFrame {
     private JLabel whoseMoveIsNowLabel = new JLabel("Who move is now: "); //this label show whose move is now
 
     private static Map<TicTacToeButtons,Integer> buttonMap = new HashMap<>(); //this map contains pairs - button and his location on the panelButtons
-    private boolean doCircleOrCross = false; //this variable discribe cross or circle choice from user
+    //private boolean doCircleOrCross = false; //this variable discribe cross or circle choice from user
 
     public GameFild(){
         addTicTacToeFild();
 
-        GameLogicClass.UserMove();
+        UserMoveClass.UserMove(whoseMoveIsNowLabel);
     }
 
     //this method add buttons,chooser panel cross or circle and show whose move is now
@@ -49,15 +49,17 @@ public class GameFild extends JFrame {
             System.out.println("cr = "+crossOrCircle.getItemAt(crossOrCircle.getSelectedIndex()));
 
             if(crossOrCircle.getItemAt(crossOrCircle.getSelectedIndex()).equals("Cross")){
-                GameLogicClass.setDoSelectedCrossOrCircle();
-                GameLogicClass.whatFigureIsSelected("cross");
+                UserMoveClass.setDoSelectedCrossOrCircle();
+                UserMoveClass.whatFigureIsSelected("cross");
             }else{
-                GameLogicClass.setDoSelectedCrossOrCircle();
-                GameLogicClass.whatFigureIsSelected("circle");
+                UserMoveClass.setDoSelectedCrossOrCircle();
+                UserMoveClass.whatFigureIsSelected("circle");
             }
 
             crossOrCircle.setEnabled(false);
             startGame.setEnabled(false);
+
+            whoseMoveIsNowLabel.setText("Who move is now: "+"your move");
         });
 
         //add label who show whose move is now

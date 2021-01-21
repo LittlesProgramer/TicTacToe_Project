@@ -20,7 +20,7 @@ public class UserMoveClass {
                     moveUser.drawingCircleOrCross(selectedFigure);
                     LogicAndComputerMoveClass.addYourMoveInMap(el.getValue()); //add your move to table
                     //class LogicClass checking on this moment you wined
-                    LogicAndComputerMoveClass.isWin(whoseMoveIsNowLabel);
+                    LogicAndComputerMoveClass.isYoursMove(whoseMoveIsNowLabel);
                     if(!LogicAndComputerMoveClass.getEndGameVariable()){
                         whoseMoveIsNowLabel.setText("Who move is now: "+"computer move");
                     }

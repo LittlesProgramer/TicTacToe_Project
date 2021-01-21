@@ -18,9 +18,10 @@ public class UserMoveClass {
                     moveUser.setEnabled(false);
                     moveUser.setOpaque(false);
                     moveUser.drawingCircleOrCross(selectedFigure);
-                    //class LogicClass checking on this moment you or yours oponent wined
+                    LogicAndComputerMoveClass.addYourMoveInMap(el.getValue()); //add your move to table
+                    //class LogicClass checking on this moment you wined
+                    LogicAndComputerMoveClass.isWin();
                     whoseMoveIsNowLabel.setText("Who move is now: "+"computer move");
-
                 }
             });
         }
@@ -29,7 +30,5 @@ public class UserMoveClass {
     public static void setDoSelectedCrossOrCircle(){
         doSelectedCrossOrCircle = true;
     }
-    public static void whatFigureIsSelected(String figure){
-        UserMoveClass.selectedFigure = figure;
-    }
+    public static void whatFigureIsSelected(String figure){ UserMoveClass.selectedFigure = figure; }
 }

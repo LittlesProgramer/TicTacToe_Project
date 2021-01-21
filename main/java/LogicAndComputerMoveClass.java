@@ -1,13 +1,17 @@
+import javax.swing.*;
 import java.util.HashSet;
+import java.util.Map;
 
 public class LogicAndComputerMoveClass {
     private static HashSet<Integer> yoursMovesMap = new HashSet<Integer>();
     private static HashSet<Integer> computerMovesMap = new HashSet<Integer>();
+    private static boolean EndGame = false;
 
     public static void addYourMoveInMap(int yoursMove){ yoursMovesMap.add(yoursMove); } //this method added yours move into the yoursMovesMap map
 
-    public static void isWin(){ //this method checking that you win
+    public static void isWin(JLabel whoseMoveIsNowLabel){ //this method checking that you win
         String moves = "";
+        whoseMoveIsNowLabel.setText("KOKOKO");
         for(Integer el : yoursMovesMap){
             System.out.println("el : "+el);
             moves = moves+el;
@@ -27,10 +31,17 @@ public class LogicAndComputerMoveClass {
 
             if(horizontal1 || horizontal2 || horizontal3 || vertical1 || vertical2 || vertical3 || cross1 || cross2){
                 System.out.println("true");
+                for(Map.Entry<GameFild.TicTacToeButtons,Integer> button : GameFild.getButtonMap().entrySet()){
+                    button.getKey().setEnabled(false);
+                    whoseMoveIsNowLabel.setText("YOU ARE WINNERS - CONGRATULATIONS !!!");
+                    EndGame = true;
+                }
             }else{
                 System.out.println("false");
             }
         }
     }
+
+    public static boolean getEndGameVariable(){ return EndGame; }//this method return variable discribe Game is Over
 
 }

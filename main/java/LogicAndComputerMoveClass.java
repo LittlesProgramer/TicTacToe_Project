@@ -19,11 +19,13 @@ public class LogicAndComputerMoveClass {
             }
 
         }else{
-
+            isComputerMove(whoseMoveIsNowLabel);
         }
     }
 
-    public static void
+    public static void isComputerMove(JLabel whoseMoveIsNowLabel){
+
+    }
 
     public static boolean checkingWhoWinsed(){
         String moves = "";

@@ -9,7 +9,7 @@ public class LogicAndComputerMoveClass {
 
     public static void addYourMoveInMap(int yoursMove){ yoursMovesMap.add(yoursMove); } //this method added yours move into the yoursMovesMap map
 
-    public static void isYoursMove(JLabel whoseMoveIsNowLabel){ //this method checking that you win
+    public static void isThisYourMove(JLabel whoseMoveIsNowLabel){ //this method checking that you win
         if(checkingWhoWinsed()){ //if true your win if false time on the computer's move
 
             for(Map.Entry<GameFild.TicTacToeButtons,Integer> button : GameFild.getButtonMap().entrySet()){
@@ -22,6 +22,8 @@ public class LogicAndComputerMoveClass {
 
         }
     }
+
+    public static void
 
     public static boolean checkingWhoWinsed(){
         String moves = "";

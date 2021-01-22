@@ -33,4 +33,5 @@ public class UserMoveClass {
         doSelectedCrossOrCircle = true;
     }
     public static void whatFigureIsSelected(String figure){ UserMoveClass.selectedFigure = figure; }
+    public static String getSelectedFigure(){ return UserMoveClass.selectedFigure; }
 }

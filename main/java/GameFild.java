@@ -97,6 +97,7 @@ public class GameFild extends JFrame {
         //according to this method choice is drawing circle or cross
         public void drawingCircleOrCross(String s){
             figure = s;
+            repaint();
         }
     }
 }

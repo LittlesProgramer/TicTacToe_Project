@@ -1,7 +1,9 @@
 import javax.swing.*;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.lang.reflect.Array;
+import java.util.*;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class LogicAndComputerMoveClass {
     private static HashSet<Integer> yoursMovesMap = new HashSet<Integer>();
@@ -29,7 +31,7 @@ public class LogicAndComputerMoveClass {
         //computer strategy
         //1.if first move choose the strongest field - firstComputerMove()
         //2.if this is your second move check that your oponent can win if yes block him
-        //3.if this is your third move
+        //3.if this is your third,fourth,fifth ... move
         //3a. check your win
         //3b. if not 3a repeat point 2
         //3c. if not 3b repeat point 1
@@ -38,7 +40,7 @@ public class LogicAndComputerMoveClass {
             firstComputerMove();
             return;
         }else if(computerMovesMap.size() == 1){
-
+            System.out.println("secoundo: "+secondComputerMove());
         }
     }
 
@@ -54,9 +56,12 @@ public class LogicAndComputerMoveClass {
                         moveUser.setOpaque(false);
                         moveUser.drawingCircleOrCross("circle");
                         computerMovesMap.add(el.getValue());
+                        return;
                     }
                 }
+
             }else{
+
                 for(Map.Entry<GameFild.TicTacToeButtons,Integer> el : GameFild.getButtonMap().entrySet()){
                     if(el.getValue() == getTheStrongestField()){
                         moveUser = el.getKey();
@@ -64,11 +69,50 @@ public class LogicAndComputerMoveClass {
                         moveUser.setOpaque(false);
                         moveUser.drawingCircleOrCross("cross");
                         computerMovesMap.add(el.getValue());
+                        return;
                     }
                 }
             }
-
         }
+    }
+
+    public static Integer secondComputerMove(){
+        String tableWinMoves[] = new String[]{"123","456","789","147","258","369","159","357"};
+
+        List<Integer> listAvilableMoves = new ArrayList<Integer>(Arrays.asList(new Integer[]{1,2,3,4,5,6,7,8,9}));
+        listAvilableMoves.removeAll(yoursMovesMap);
+        listAvilableMoves.removeAll(computerMovesMap);
+
+        String convertYourMoveMapOnTheString = "";
+        for(Integer i: yoursMovesMap){
+            convertYourMoveMapOnTheString = convertYourMoveMapOnTheString+i;
+        }
+
+        int computerBlockYour_sWinMove = 0;
+
+        for(String winMoves: tableWinMoves) {
+            for (Integer availableMove : listAvilableMoves) {
+                String converPlusAvailable = (convertYourMoveMapOnTheString + availableMove);
+
+                //this code sort convertPlusAvailable
+                String kod = converPlusAvailable;
+                char tab[] = new char[kod.length()];
+                for(int x = 0 ; x < tab.length ; x++){
+                    char znak = kod.charAt(x);
+                    tab[x] = znak;
+                }
+
+                Arrays.sort(tab);
+                converPlusAvailable = new String(tab);
+
+                if (converPlusAvailable.contains(winMoves)){
+                    computerBlockYour_sWinMove = availableMove;
+                }
+                converPlusAvailable = convertYourMoveMapOnTheString;
+            }
+        }
+
+        return computerBlockYour_sWinMove;
     }
 
     public static boolean checkingYoursWinsed(){

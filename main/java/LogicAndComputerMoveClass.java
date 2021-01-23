@@ -37,15 +37,17 @@ public class LogicAndComputerMoveClass {
         //3c. if not 3b repeat point 1
 
         if(computerMovesMap.size() == 0){
-            firstComputerMove();
+            drawingAllComputerMoves();
             return;
         }else if(computerMovesMap.size() == 1){
-            System.out.println("secoundo: "+secondComputerMove());
+            System.out.println("secoundo: "+checkingPlayerWinAndBlockedHisMove());
+        }else{
+
         }
     }
 
-    public static void firstComputerMove(){
-        if(computerMovesMap.size() == 0){
+    public static void drawingAllComputerMoves(){
+        //if(computerMovesMap.size() == 0){
             GameFild.TicTacToeButtons moveUser = null;
 
             if(UserMoveClass.getSelectedFigure().equals("cross")){
@@ -73,10 +75,10 @@ public class LogicAndComputerMoveClass {
                     }
                 }
             }
-        }
+       //}
     }
 
-    public static Integer secondComputerMove(){
+    public static Integer checkingPlayerWinAndBlockedHisMove(){
         String tableWinMoves[] = new String[]{"123","456","789","147","258","369","159","357"};
 
         List<Integer> listAvilableMoves = new ArrayList<Integer>(Arrays.asList(new Integer[]{1,2,3,4,5,6,7,8,9}));
@@ -144,7 +146,6 @@ public class LogicAndComputerMoveClass {
         return EndGame;
     }
 
-    public static boolean getEndGameVariable(){ return EndGame; }//this method return variable discribe Game is Over
     public static int getTheStrongestField(){
         Set<Integer> theStrongestField = new HashSet<>();
         theStrongestField.addAll(computerMovesMap);
@@ -178,6 +179,10 @@ public class LogicAndComputerMoveClass {
                 return 8;
             }
         }
-        return 0; //Koniec
+
+        return 0;
     }
+
+    public static boolean getEndGameVariable(){ return EndGame; }//this method return variable discribe Game is Over
+
 }

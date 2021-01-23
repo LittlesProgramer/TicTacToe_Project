@@ -37,7 +37,7 @@ public class LogicAndComputerMoveClass {
         //3c. if not 3b repeat point 1
 
         if(computerMovesMap.size() == 0){
-            drawingAllComputerMoves();
+            drawingAllComputerMoves(getTheStrongestField());
             return;
         }else if(computerMovesMap.size() == 1){
             System.out.println("secoundo: "+checkingPlayerWinAndBlockedHisMove());
@@ -46,36 +46,34 @@ public class LogicAndComputerMoveClass {
         }
     }
 
-    public static void drawingAllComputerMoves(){
-        //if(computerMovesMap.size() == 0){
-            GameFild.TicTacToeButtons moveUser = null;
+    public static void drawingAllComputerMoves(int drawMove){
+        GameFild.TicTacToeButtons moveUser = null;
 
-            if(UserMoveClass.getSelectedFigure().equals("cross")){
-                for(Map.Entry<GameFild.TicTacToeButtons,Integer> el : GameFild.getButtonMap().entrySet()){
-                    if(el.getValue() == getTheStrongestField()){
-                        moveUser = el.getKey();
-                        moveUser.setEnabled(false);
-                        moveUser.setOpaque(false);
-                        moveUser.drawingCircleOrCross("circle");
-                        computerMovesMap.add(el.getValue());
-                        return;
-                    }
-                }
-
-            }else{
-
-                for(Map.Entry<GameFild.TicTacToeButtons,Integer> el : GameFild.getButtonMap().entrySet()){
-                    if(el.getValue() == getTheStrongestField()){
-                        moveUser = el.getKey();
-                        moveUser.setEnabled(false);
-                        moveUser.setOpaque(false);
-                        moveUser.drawingCircleOrCross("cross");
-                        computerMovesMap.add(el.getValue());
-                        return;
-                    }
+        if(UserMoveClass.getSelectedFigure().equals("cross")){
+            for(Map.Entry<GameFild.TicTacToeButtons,Integer> el : GameFild.getButtonMap().entrySet()){
+                if(el.getValue() == drawMove){
+                    moveUser = el.getKey();
+                    moveUser.setEnabled(false);
+                    moveUser.setOpaque(false);
+                    moveUser.drawingCircleOrCross("circle");
+                    computerMovesMap.add(el.getValue());
+                    return;
                 }
             }
-       //}
+
+        }else{
+
+            for(Map.Entry<GameFild.TicTacToeButtons,Integer> el : GameFild.getButtonMap().entrySet()){
+                if(el.getValue() == drawMove){
+                    moveUser = el.getKey();
+                    moveUser.setEnabled(false);
+                    moveUser.setOpaque(false);
+                    moveUser.drawingCircleOrCross("cross");
+                    computerMovesMap.add(el.getValue());
+                    return;
+                }
+            }
+        }
     }
 
     public static Integer checkingPlayerWinAndBlockedHisMove(){

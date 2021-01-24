@@ -19,7 +19,6 @@ public class GameFild extends JFrame {
 
     public GameFild(){
         addTicTacToeFild();
-
         UserMoveClass.UserMove(whoseMoveIsNowLabel);
     }
 
@@ -46,7 +45,6 @@ public class GameFild extends JFrame {
 
         //action for this button is choose circle or cross for user
         startGame.addActionListener((action)->{
-            System.out.println("cr = "+crossOrCircle.getItemAt(crossOrCircle.getSelectedIndex()));
 
             if(crossOrCircle.getItemAt(crossOrCircle.getSelectedIndex()).equals("Cross")){
                 UserMoveClass.setDoSelectedCrossOrCircle();
@@ -82,7 +80,6 @@ public class GameFild extends JFrame {
 
         public void paintComponent(Graphics g){
             Graphics2D g2 = (Graphics2D) g;
-            //System.out.println("paint");
             if(figure != null) {
                 if (figure.equals("cross")) {
                     g2.draw(rect2D);

@@ -1,18 +1,17 @@
 import javax.swing.*;
-import java.lang.reflect.Array;
 import java.util.*;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class LogicAndComputerMoveClass {
     private static HashSet<Integer> yoursMovesMap = new HashSet<Integer>();
     private static HashSet<Integer> computerMovesMap = new HashSet<Integer>();
     private static boolean EndGame = false; //this variable describe that this game is end
+    private static JLabel whoMoveIsNow = null;
 
     public static void addYourMoveInMap(int yoursMove){ yoursMovesMap.add(yoursMove); } //this method added yours move into the yoursMovesMap map
+    public static void addCompInMap(int compMove){ computerMovesMap.add(compMove); }
 
-    public static void isThisYourMove(JLabel whoseMoveIsNowLabel){ //this method checking that you win
+    public static void isThisYourMove(JLabel whoseMoveIsNowLabel) { //this method checking that you win
+        whoMoveIsNow = whoseMoveIsNowLabel;
         if(checkingYoursWinsed()){ //if true your win if false time on the computer's move
 
             for(Map.Entry<GameFild.TicTacToeButtons,Integer> button : GameFild.getButtonMap().entrySet()){
@@ -22,11 +21,34 @@ public class LogicAndComputerMoveClass {
             }
 
         }else{
-            isComputerMove(whoseMoveIsNowLabel);
+            Thread t = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    whoMoveIsNow.setText("Who move is now: "+"computer move");
+                    try {
+                        Thread.sleep(3000);
+                        isComputerMove(whoseMoveIsNowLabel);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    whoMoveIsNow.setText("Who move is now: "+"your move");
+                }
+            });
+            t.start();
+            System.out.println("th = "+t.getName());
+
+            //----------------------------------------------------------------------------------
+            for(Integer compMove: computerMovesMap){
+                System.out.println("computer: "+compMove);
+            }
+            for (Integer playerMove: yoursMovesMap){
+                System.out.println("player: "+playerMove);
+            }
+            //-----------------------------------------------------------------------------------
         }
     }
 
-    public static void isComputerMove(JLabel whoseMoveIsNowLabel){
+    public static void isComputerMove(JLabel whoseMoveIsNowLabel) {
 
         //computer strategy
         //1.if first move choose the strongest field - firstComputerMove()
@@ -40,13 +62,14 @@ public class LogicAndComputerMoveClass {
             drawingAllComputerMoves(getTheStrongestField());
             return;
         }else if(computerMovesMap.size() == 1){
-            System.out.println("secoundo: "+checkingPlayerWinAndBlockedHisMove());
+            drawingAllComputerMoves(checkingPlayerWinAndBlockedHisMove());
+            return;
         }else{
 
         }
     }
 
-    public static void drawingAllComputerMoves(int drawMove){
+    public static void drawingAllComputerMoves(int drawMove) {
         GameFild.TicTacToeButtons moveUser = null;
 
         if(UserMoveClass.getSelectedFigure().equals("cross")){

@@ -13,7 +13,6 @@ public class UserMoveClass {
                 if(!doSelectedCrossOrCircle){
                     JOptionPane.showMessageDialog(null,"Proszê wybraæ kó³ko lub krzy¿yk");
                 }else {
-                    System.out.println("id = " + el.getValue());
                     moveUser = el.getKey();
                     moveUser.setEnabled(false);
                     moveUser.setOpaque(false);

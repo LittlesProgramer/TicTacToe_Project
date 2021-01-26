@@ -27,19 +27,25 @@ public class LogicAndComputerMoveClass {
                 public void run() {
                     whoMoveIsNow.setText("Who move is now: "+"computer move");
                     try {
-                        Thread.sleep(500);
-                        isComputerMove(whoseMoveIsNowLabel);
+                        Thread.sleep(2500);
+                        if(isComputerMove(whoseMoveIsNowLabel)){
+                            Thread.currentThread().interrupt();
+                            whoseMoveIsNowLabel.setText("COMPUTER ARE WINNERS - SORRY YOU LOUSE - next time will be better ;) ");
+                        }else{
+                            whoseMoveIsNowLabel.setText("Who move is now: "+"your move");
+                        }
+
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    whoMoveIsNow.setText("Who move is now: "+"your move");
+                    //whoMoveIsNow.setText("Who move is now: "+"your move");
                 }
             });
             t.start();
         }
     }
 
-    public static void isComputerMove(JLabel whoseMoveIsNowLabel) {
+    public static boolean isComputerMove(JLabel whoseMoveIsNowLabel) {
 
         //computer strategy
         //1.if first move choose the strongest field - firstComputerMove()
@@ -72,14 +78,14 @@ public class LogicAndComputerMoveClass {
 
                 addCompInMap(compWinMove);
                 if(checkingYoursWinsed(computerMovesMap)){
-                    System.out.println("WYGRANA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
                     drawingAllComputerMoves(compWinMove);
 
                     for(Map.Entry<GameFild.TicTacToeButtons,Integer> button : GameFild.getButtonMap().entrySet()){
                         button.getKey().setEnabled(false);
                         EndGame = true;
                     }
-
+                    return getEndGameVariable();
 
                 }else{ JOptionPane.showMessageDialog(null,"cos nie tak");}
             }else{
@@ -95,6 +101,8 @@ public class LogicAndComputerMoveClass {
                 }
             }
         }
+
+        return getEndGameVariable();
     }
 
     public static void drawingAllComputerMoves(int drawMove) {

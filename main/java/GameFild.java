@@ -13,6 +13,7 @@ public class GameFild extends JFrame {
     private JPanel panelButtons = new JPanel(); //panel containing 9 TicTacToe palying filds
     private JPanel whoseMoveIsNow = new JPanel(); //this panel contains JLabel whoseMoveIsNowLabel
     private JLabel whoseMoveIsNowLabel = new JLabel("Who move is now: "); //this label show whose move is now
+    private TicTacToeButtons buttons = null;
 
     private static Map<TicTacToeButtons,Integer> buttonMap = new HashMap<>(); //this map contains pairs - button and his location on the panelButtons
     //private boolean doCircleOrCross = false; //this variable discribe cross or circle choice from user
@@ -33,7 +34,7 @@ public class GameFild extends JFrame {
         this.add(panelButtons,BorderLayout.CENTER);
         panelButtons.setLayout(new GridLayout(3,3));
 
-        TicTacToeButtons buttons = null;
+        //TicTacToeButtons buttons = null;
 
         //add 9 buttons to panelButtons
         for(int x = 1 ; x <= 9 ; x++){
@@ -74,16 +75,31 @@ public class GameFild extends JFrame {
 
     //this is class TicTacToe which draw circle or cross according to the user's choice using the drawingCircleOrCross method
     class TicTacToeButtons extends JButton{
-        private Rectangle2D rect2D = new Rectangle2D.Double(10,10,10,10);
-        private Ellipse2D elli2D = new Ellipse2D.Double(10,10,10,10);
+        private int wid;
+        private int hei;
+        private Rectangle2D rect2D = null;//new Rectangle2D.Double(10,10,wid,10);
+        private Ellipse2D elli2D = null;//new Ellipse2D.Double(10,10,160/2,10);
+        private BasicStroke stroke = new BasicStroke(3);
+
         private String figure = null;
 
         public void paintComponent(Graphics g){
             Graphics2D g2 = (Graphics2D) g;
+            g2.setStroke(stroke);
+
             if(figure != null) {
+
+                wid = getXY().width;
+                hei = getXY().height;
+
+                rect2D = new Rectangle2D.Double(35,35,wid-70,hei-70);
+                elli2D = new Ellipse2D.Double(35,35,wid-70,hei-70);
+
                 if (figure.equals("cross")) {
+                    g2.setColor(Color.RED);
                     g2.draw(rect2D);
                 }else if(figure.equals("circle")){
+                    g2.setColor(Color.GREEN);
                     g2.draw(elli2D);
                 }
             }else{
@@ -95,6 +111,18 @@ public class GameFild extends JFrame {
         public void drawingCircleOrCross(String s){
             figure = s;
             repaint();
+        }
+
+        public int getWidthButtonTicTacToe(){
+            return this.getSize().width;
+        }
+        public int getHeightButtonTicTacToe(){
+            return this.getSize().height;
+        }
+        public Dimension getXY(){
+            Dimension dim = new Dimension();
+            dim.setSize(getWidthButtonTicTacToe(),getHeightButtonTicTacToe());
+            return dim;
         }
     }
 }

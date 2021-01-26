@@ -14,6 +14,10 @@ public class LogicAndComputerMoveClass {
     public static void isThisYourMove(JLabel whoseMoveIsNowLabel) { //this method checking that you win
         whoMoveIsNow = whoseMoveIsNowLabel;
         if(checkingYoursWinsed(yoursMovesMap)){ //if true your win if false time on the computer's move
+            if(getDrawGameMatch()){
+                whoseMoveIsNowLabel.setText("REMIS !!!!");
+                return;
+            }
 
             for(Map.Entry<GameFild.TicTacToeButtons,Integer> button : GameFild.getButtonMap().entrySet()){
                     button.getKey().setEnabled(false);
@@ -32,13 +36,17 @@ public class LogicAndComputerMoveClass {
                             Thread.currentThread().interrupt();
                             whoseMoveIsNowLabel.setText("COMPUTER ARE WINNERS - SORRY YOU LOUSE - next time will be better ;) ");
                         }else{
+
+                            if(getDrawGameMatch()){
+                                whoseMoveIsNowLabel.setText("REMIS !!!!");
+                                return;
+                            }
                             whoseMoveIsNowLabel.setText("Who move is now: "+"your move");
                         }
 
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    //whoMoveIsNow.setText("Who move is now: "+"your move");
                 }
             });
             t.start();
@@ -337,5 +345,10 @@ public class LogicAndComputerMoveClass {
     }
 
     public static boolean getEndGameVariable(){ return EndGame; }//this method return variable discribe Game is Over
+    public static boolean getDrawGameMatch(){
+        if(yoursMovesMap.size()+computerMovesMap.size() == 10){
+            return true;
+        }else{ return false;}
+    }
 
 }

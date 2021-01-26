@@ -7,7 +7,7 @@ public class BasicClass {
             @Override
             public void run() {
                 GameFild gameFild = new GameFild();
-                gameFild.setSize(new Dimension(500,500));
+                gameFild.setSize(new Dimension(500,575));
                 gameFild.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 gameFild.setVisible(true);
             }

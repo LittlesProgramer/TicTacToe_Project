@@ -68,10 +68,8 @@ public class LogicAndComputerMoveClass {
             int blockedMove = checkingPlayerWinAndBlockedHisMove();
             int strongest = getTheStrongestField();
 
-            System.out.println("STRONG = "+strongest+" BLOCKED = "+blockedMove+" COMPWINMOVE = "+compWinMove);
-
             if(compWinMove != 0){
-                System.out.println("IF WIN");
+
                 addCompInMap(compWinMove);
                 if(checkingYoursWinsed(computerMovesMap)){
                     System.out.println("WYGRANA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
@@ -82,14 +80,16 @@ public class LogicAndComputerMoveClass {
                         EndGame = true;
                     }
 
+
                 }else{ JOptionPane.showMessageDialog(null,"cos nie tak");}
             }else{
                 if(blockedMove != 0){
-                    System.out.println("IF BLOCKED");
+
                     drawingAllComputerMoves(blockedMove);
                     addCompInMap(blockedMove);
+
                 }else{
-                    System.out.println("IF STRONGEST");
+
                     drawingAllComputerMoves(strongest);
                     addCompInMap(strongest);
                 }
@@ -155,7 +155,7 @@ public class LogicAndComputerMoveClass {
                 converPlusAvailable = new String(tab);
 
                 if (converPlusAvailable.contains(winMoves)){
-                    System.out.println("rozpatrywane Wygranej = "+converPlusAvailable+" winMoves = "+winMoves);
+
                     computer_sWinedMove = availableMove;
 
                     int x = 0;
@@ -176,55 +176,60 @@ public class LogicAndComputerMoveClass {
     }
 
     public static Integer checkingPlayerWinAndBlockedHisMove(){
-        System.out.println("metoda blokowania 1");
 
         List<Integer> listAvilableMoves = new ArrayList<Integer>(Arrays.asList(new Integer[]{1,2,3,4,5,6,7,8,9}));
         listAvilableMoves.removeAll(yoursMovesMap);
         listAvilableMoves.removeAll(computerMovesMap);
-        System.out.println("metoda blokowania 2");
+
         String convertYourMoveMapOnTheString = "";
         for(Integer i: yoursMovesMap){
             convertYourMoveMapOnTheString = convertYourMoveMapOnTheString+i;
         }
-        System.out.println("metoda blokowania 3");
-        int computerBlockYour_sWinMove = 0;
 
-        for(String winMoves: tableWinMoves) {
-            for (Integer availableMove : listAvilableMoves) {
-                String converPlusAvailable = (convertYourMoveMapOnTheString + availableMove);
 
-                //this code sort convertPlusAvailable
-                String kod = converPlusAvailable;
-                char tab[] = new char[kod.length()];
-                for(int x = 0 ; x < tab.length ; x++){
-                    char znak = kod.charAt(x);
-                    tab[x] = znak;
-                }
+        for(int v = 0 ; v < convertYourMoveMapOnTheString.length() ; v++) {
+            for (int y = 0; y < convertYourMoveMapOnTheString.length(); y++) {
 
-                Arrays.sort(tab);
-                converPlusAvailable = new String(tab);
-                System.out.println("winMoves = "+winMoves+" convertPlusAvailable = "+converPlusAvailable+" availableMove = "+availableMove);
+                int computerBlockYour_sWinMove = 0;
 
-                int x = 0;
-                if (converPlusAvailable.contains(winMoves)){
-                    System.out.println("rozpatrywane blokowanie = "+converPlusAvailable+" winMoves = "+winMoves);
-                    computerBlockYour_sWinMove = availableMove;
+                for (String winMoves : tableWinMoves) {
+                    for (Integer availableMove : listAvilableMoves) {
+                        String converPlusAvailable = (((char) convertYourMoveMapOnTheString.charAt(v)) + "" + ((char) convertYourMoveMapOnTheString.charAt(y)) + availableMove);
 
-                    for(String el: tableWinMoves){
-                        if(el.equals(winMoves)){
-                            break;
+                        //this code sort convertPlusAvailable
+                        String kod = converPlusAvailable;
+                        char tab[] = new char[kod.length()];
+                        for (int x = 0; x < tab.length; x++) {
+                            char znak = kod.charAt(x);
+                            tab[x] = znak;
                         }
-                        x++;
+
+                        Arrays.sort(tab);
+                        converPlusAvailable = new String(tab);
+
+                        int x = 0;
+                        if (converPlusAvailable.contains(winMoves)) {
+
+                            computerBlockYour_sWinMove = availableMove;
+
+                            for (String el : tableWinMoves) {
+                                if (el.equals(winMoves)) {
+                                    break;
+                                }
+                                x++;
+                            }
+
+                            tableWinMoves = removeWinMoveFromTableWin(tableWinMoves, x);
+                            return computerBlockYour_sWinMove;
+                        }
+                        //converPlusAvailable = convertYourMoveMapOnTheString;
+
                     }
-
-                    tableWinMoves = removeWinMoveFromTableWin(tableWinMoves,x);
                 }
-                converPlusAvailable = convertYourMoveMapOnTheString;
-
             }
         }
 
-        return computerBlockYour_sWinMove;
+        return 0;
     }
 
     public static boolean checkingYoursWinsed(Set<Integer> listChoice){

@@ -345,7 +345,7 @@ public class LogicAndComputerMoveClass {
     }
 
     public static boolean getEndGameVariable(){ return EndGame; }//this method return variable discribe Game is Over
-    public static boolean getDrawGameMatch(){
+    public static boolean getDrawGameMatch(){//this method return true if draw in game
         if(yoursMovesMap.size()+computerMovesMap.size() == 10){
             return true;
         }else{ return false;}

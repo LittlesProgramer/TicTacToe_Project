@@ -6,7 +6,7 @@ public class UserMoveClass {
     private static boolean doSelectedCrossOrCircle = false;
     private static String selectedFigure = "";
 
-    public static void UserMove(JLabel whoseMoveIsNowLabel){
+    public static void UserMove(JLabel whoseMoveIsNowLabel){ //this method draw your move
 
         for(Map.Entry<GameFild.TicTacToeButtons,Integer> el : GameFild.getButtonMap().entrySet()){
             el.getKey().addActionListener((action)->{

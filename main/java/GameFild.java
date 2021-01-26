@@ -24,7 +24,7 @@ public class GameFild extends JFrame {
     }
 
     //this method add buttons,chooser panel cross or circle and show whose move is now
-    public void addTicTacToeFild(){
+    public void addTicTacToeFild(){ //this method add button,label itd....
         this.setLayout(new BorderLayout());
 
         this.add(panelCrossCircle,BorderLayout.NORTH);
@@ -74,11 +74,11 @@ public class GameFild extends JFrame {
     }
 
     //this is class TicTacToe which draw circle or cross according to the user's choice using the drawingCircleOrCross method
-    class TicTacToeButtons extends JButton{
+    class TicTacToeButtons extends JButton{//this is Button field class
         private int wid;
         private int hei;
-        private Rectangle2D rect2D = null;//new Rectangle2D.Double(10,10,wid,10);
-        private Ellipse2D elli2D = null;//new Ellipse2D.Double(10,10,160/2,10);
+        private Rectangle2D rect2D = null;
+        private Ellipse2D elli2D = null;
         private BasicStroke stroke = new BasicStroke(3);
 
         private String figure = null;

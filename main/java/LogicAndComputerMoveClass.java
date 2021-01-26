@@ -9,13 +9,13 @@ public class LogicAndComputerMoveClass {
     private static JLabel whoMoveIsNow = null;
 
     public static void addYourMoveInMap(int yoursMove){ yoursMovesMap.add(yoursMove); } //this method added yours move into the yoursMovesMap map
-    public static void addCompInMap(int compMove){ computerMovesMap.add(compMove); }
+    public static void addCompInMap(int compMove){ computerMovesMap.add(compMove); }//this methid addes computer move into the computerMoveMap map
 
     public static void isThisYourMove(JLabel whoseMoveIsNowLabel) { //this method checking that you win
         whoMoveIsNow = whoseMoveIsNowLabel;
         if(checkingYoursWinsed(yoursMovesMap)){ //if true your win if false time on the computer's move
             if(getDrawGameMatch()){
-                whoseMoveIsNowLabel.setText("REMIS !!!!");
+                whoseMoveIsNowLabel.setText("Draw - Remis !!!!");
                 return;
             }
 
@@ -53,7 +53,7 @@ public class LogicAndComputerMoveClass {
         }
     }
 
-    public static boolean isComputerMove(JLabel whoseMoveIsNowLabel) {
+    public static boolean isComputerMove(JLabel whoseMoveIsNowLabel) {//this is computer's strategy method
 
         //computer strategy
         //1.if first move choose the strongest field - firstComputerMove()
@@ -78,6 +78,7 @@ public class LogicAndComputerMoveClass {
                 addCompInMap(strongest);
             }
         }else{
+            //this three variable can use to set degree of difficulty example: if comWinMove = 0 or blockedMove = 0 or both = 0
             int compWinMove = computer_sWiningMove();
             int blockedMove = checkingPlayerWinAndBlockedHisMove();
             int strongest = getTheStrongestField();
@@ -113,7 +114,7 @@ public class LogicAndComputerMoveClass {
         return getEndGameVariable();
     }
 
-    public static void drawingAllComputerMoves(int drawMove) {
+    public static void drawingAllComputerMoves(int drawMove) {//this method draw all figure in game
         GameFild.TicTacToeButtons moveUser = null;
 
         if(UserMoveClass.getSelectedFigure().equals("cross")){
@@ -141,7 +142,7 @@ public class LogicAndComputerMoveClass {
         }
     }
 
-    public static Integer computer_sWiningMove(){
+    public static Integer computer_sWiningMove(){//this method check computer's wining
         //String tableWinMoves[] = new String[]{"123","456","789","147","258","369","159","357"};
 
         List<Integer> listAvilableMoves = new ArrayList<Integer>(Arrays.asList(new Integer[]{1,2,3,4,5,6,7,8,9}));
@@ -191,7 +192,7 @@ public class LogicAndComputerMoveClass {
         return computer_sWinedMove;
     }
 
-    public static Integer checkingPlayerWinAndBlockedHisMove(){
+    public static Integer checkingPlayerWinAndBlockedHisMove(){//In this method computer check that you can win if yes blocking your wins move
 
         List<Integer> listAvilableMoves = new ArrayList<Integer>(Arrays.asList(new Integer[]{1,2,3,4,5,6,7,8,9}));
         listAvilableMoves.removeAll(yoursMovesMap);
@@ -248,7 +249,7 @@ public class LogicAndComputerMoveClass {
         return 0;
     }
 
-    public static boolean checkingYoursWinsed(Set<Integer> listChoice){
+    public static boolean checkingYoursWinsed(Set<Integer> listChoice){//this method check your wins
         String moves = "";
         for(Integer el : listChoice){
             moves = moves+el;
@@ -274,7 +275,7 @@ public class LogicAndComputerMoveClass {
         return EndGame;
     }
 
-    public static int getTheStrongestField(){
+    public static int getTheStrongestField(){//this methid return the strongest field in current game
         List<Integer> listAvilableMoves = new ArrayList<Integer>(Arrays.asList(new Integer[]{1,2,3,4,5,6,7,8,9}));
         listAvilableMoves.removeAll(yoursMovesMap);
         listAvilableMoves.removeAll(computerMovesMap);

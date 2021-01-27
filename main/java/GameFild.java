@@ -96,6 +96,8 @@ public class GameFild extends JFrame {
                 rect2D = new Rectangle2D.Double(35,35,wid-70,hei-70);
                 elli2D = new Ellipse2D.Double(35,35,wid-70,hei-70);
 
+                String lineVinMoves = LogicAndComputerMoveClass.getLineWinMoves();
+
                 if (figure.equals("cross")) {
                     g2.setColor(Color.RED);
                     g2.draw(rect2D);
@@ -103,7 +105,10 @@ public class GameFild extends JFrame {
                     g2.setColor(Color.GREEN);
                     g2.draw(elli2D);
                 }else if(figure.equals("line+cross")){
+
+                    g2.setColor(Color.YELLOW);
                     g2.draw(new Line2D.Double(20,20,140,20));
+                    g2.setColor(Color.GREEN);
                     g2.draw(new Rectangle2D.Double(20,20,20,20));
                     //repaint();
                 }else if(figure.equals("line+circle")){

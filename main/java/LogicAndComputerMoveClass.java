@@ -7,6 +7,7 @@ public class LogicAndComputerMoveClass {
     private static Set<Integer> computerMovesMap = new HashSet<Integer>();
     private static boolean EndGame = false; //this variable describe that this game is end
     private static JLabel whoMoveIsNow = null;
+    private static String lineWinMoves = null;
 
     public static void addYourMoveInMap(int yoursMove){ yoursMovesMap.add(yoursMove); } //this method added yours move into the yoursMovesMap map
     public static void addCompInMap(int compMove){ computerMovesMap.add(compMove); }//this methid addes computer move into the computerMoveMap map
@@ -34,7 +35,7 @@ public class LogicAndComputerMoveClass {
                     try {
                         Thread.sleep(300);
                         if(isComputerMove(whoseMoveIsNowLabel)){
-                            drawVictoryLine("147");
+                            drawVictoryLine(getLineWinMoves());
                             Thread.currentThread().interrupt();
                             whoseMoveIsNowLabel.setText("COMPUTER ARE WINNERS - SORRY YOU LOUSE - next time will be better ;) ");
                         }else{
@@ -209,6 +210,7 @@ public class LogicAndComputerMoveClass {
                 converPlusAvailable = new String(tab);
 
                 if (converPlusAvailable.contains(winMoves)){
+                    lineWinMoves = winMoves;
 
                     computer_sWinedMove = availableMove;
 
@@ -388,5 +390,6 @@ public class LogicAndComputerMoveClass {
             return true;
         }else{ return false;}
     }
+    public static String getLineWinMoves(){ return lineWinMoves; }//this method return all win fild moves
 
 }

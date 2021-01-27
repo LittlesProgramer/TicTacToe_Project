@@ -7,7 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GameFild extends JFrame {
-    private JComboBox<String> crossOrCircle = new JComboBox<String>(new String[]{"Cross","Circle"}); //choose user
+    private JComboBox<String> crossOrCircle = new JComboBox<String>(new String[]{"Cross","Circle"}); //choose figure
+    private JComboBox<String> difficultLevel = new JComboBox<>(new String[]{"easy","middel","only draw"});
     private JButton startGame = new JButton("Start Game"); //start game button
 
     private JPanel panelCrossCircle = new JPanel(); //pannel including user option choosing circle or cross
@@ -17,7 +18,6 @@ public class GameFild extends JFrame {
     private TicTacToeButtons buttons = null;
 
     private static Map<TicTacToeButtons,Integer> buttonMap = new HashMap<>(); //this map contains pairs - button and his location on the panelButtons
-    //private boolean doCircleOrCross = false; //this variable discribe cross or circle choice from user
 
     public GameFild(){
         addTicTacToeFild();

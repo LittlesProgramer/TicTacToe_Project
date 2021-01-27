@@ -114,6 +114,10 @@ public class LogicAndComputerMoveClass {
         return getEndGameVariable();
     }
 
+    public static void victoryLine(){
+
+    }
+
     public static void drawingAllComputerMoves(int drawMove) {//this method draw all figure in game
         GameFild.TicTacToeButtons moveUser = null;
 

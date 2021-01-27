@@ -78,8 +78,15 @@ public class GameFild extends JFrame {
     class TicTacToeButtons extends JButton{//this is Button field class
         private int wid;
         private int hei;
+
         private Rectangle2D rect2D = null;
         private Ellipse2D elli2D = null;
+
+        private Line2D lineHorizontal = null;
+        private Line2D lineVertical = null;
+        private Line2D leftLine = null;
+        private Line2D rightLine = null;
+
         private BasicStroke stroke = new BasicStroke(3);
 
         private String figure = null;
@@ -96,6 +103,18 @@ public class GameFild extends JFrame {
                 rect2D = new Rectangle2D.Double(35,35,wid-70,hei-70);
                 elli2D = new Ellipse2D.Double(35,35,wid-70,hei-70);
 
+                double x = this.getInsets().left;
+                double y = this.getInsets().top;
+                double width = this.getWidth();
+                double height = this.getHeight();
+                double middleX = width/2;
+                double middleY = height/2;
+
+                lineVertical = new Line2D.Double(middleX,y,middleX,height);
+                lineHorizontal = new Line2D.Double(this.getY(),middleY,width,middleY);
+                leftLine = new Line2D.Double(0,0,width,height);
+                rightLine = new Line2D.Double(0,height,width,0);
+
                 String lineVinMoves = LogicAndComputerMoveClass.getLineWinMoves();
 
                 if (figure.equals("cross")) {
@@ -106,14 +125,51 @@ public class GameFild extends JFrame {
                     g2.draw(elli2D);
                 }else if(figure.equals("line+cross")){
 
-                    g2.setColor(Color.YELLOW);
-                    g2.draw(new Line2D.Double(20,20,140,20));
-                    g2.setColor(Color.GREEN);
-                    g2.draw(new Rectangle2D.Double(20,20,20,20));
-                    //repaint();
+                    if(figure.equals("line+cross") && (lineVinMoves.equals("147") || lineVinMoves.equals("258") || lineVinMoves.equals("369"))){
+                        g2.setColor(Color.YELLOW);
+                        g2.draw(lineVertical);
+                        g2.setColor(Color.GREEN);
+                        g2.draw(new Ellipse2D.Double(35,35,wid-70,hei-70));
+                    }else if(figure.equals("line+cross") && (lineVinMoves.equals("123") || lineVinMoves.equals("456") || lineVinMoves.equals("789"))){
+                        g2.setColor(Color.YELLOW);
+                        g2.draw(lineHorizontal);
+                        g2.setColor(Color.GREEN);
+                        g2.draw(new Ellipse2D.Double(35,35,wid-70,hei-70));
+                    }else if(figure.equals("line+cross") && lineVinMoves.equals("159")){
+                        g2.setColor(Color.YELLOW);
+                        g2.draw(leftLine);
+                        g2.setColor(Color.GREEN);
+                        g2.draw(new Ellipse2D.Double(35,35,wid-70,hei-70));
+                    }else if(figure.equals("line+cross") && lineVinMoves.equals("357")){
+                        g2.setColor(Color.YELLOW);
+                        g2.draw(rightLine);
+                        g2.setColor(Color.GREEN);
+                        g2.draw(new Ellipse2D.Double(35,35,wid-70,hei-70));
+                    }
+
                 }else if(figure.equals("line+circle")){
-                    g2.draw(new Line2D.Double(20,20,140,20));
-                    g2.draw(new Rectangle2D.Double(20,20,20,20));
+
+                    if(figure.equals("line+circle") && (lineVinMoves.equals("147") || lineVinMoves.equals("258") || lineVinMoves.equals("369"))){
+                        g2.setColor(Color.YELLOW);
+                        g2.draw(lineVertical);
+                        g2.setColor(Color.RED);
+                        g2.draw(new Rectangle2D.Double(35,35,wid-70,hei-70));
+                    }else if(figure.equals("line+circle") && (lineVinMoves.equals("123") || lineVinMoves.equals("456") || lineVinMoves.equals("789"))){
+                        g2.setColor(Color.YELLOW);
+                        g2.draw(lineHorizontal);
+                        g2.setColor(Color.RED);
+                        g2.draw(new Rectangle2D.Double(35,35,wid-70,hei-70));
+                    }else if(figure.equals("line+circle") && lineVinMoves.equals("159")){
+                        g2.setColor(Color.YELLOW);
+                        g2.draw(leftLine);
+                        g2.setColor(Color.RED);
+                        g2.draw(new Rectangle2D.Double(35,35,wid-70,hei-70));
+                    }else if(figure.equals("line+circle") && lineVinMoves.equals("357")){
+                        g2.setColor(Color.YELLOW);
+                        g2.draw(rightLine);
+                        g2.setColor(Color.RED);
+                        g2.draw(new Rectangle2D.Double(35,35,wid-70,hei-70));
+                    }
                 }
 
             }else{
@@ -123,7 +179,6 @@ public class GameFild extends JFrame {
 
         //according to this method choice is drawing circle or cross
         public void drawingCircleOrCross(String s){
-            System.out.println("s = "+s);
             figure = s;
             repaint();
         }

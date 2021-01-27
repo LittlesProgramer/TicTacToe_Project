@@ -16,11 +16,6 @@ public class LogicAndComputerMoveClass {
         whoMoveIsNow = whoseMoveIsNowLabel;
         if(checkingYoursWinsed(yoursMovesMap)){ //if true your win if false time on the computer's move
 
-            /*if(getDrawGameMatch()){
-                whoseMoveIsNowLabel.setText("Draw - Remis !!!!");
-                return;
-            }*/
-
             for(Map.Entry<GameFild.TicTacToeButtons,Integer> button : GameFild.getButtonMap().entrySet()){
                     button.getKey().setEnabled(false);
                     whoseMoveIsNowLabel.setText("YOU ARE WINNERS - CONGRATULATIONS !!!");
@@ -278,8 +273,6 @@ public class LogicAndComputerMoveClass {
                             tableWinMoves = removeWinMoveFromTableWin(tableWinMoves, x);
                             return computerBlockYour_sWinMove;
                         }
-                        //converPlusAvailable = convertYourMoveMapOnTheString;
-
                     }
                 }
             }

@@ -14,10 +14,11 @@ public class LogicAndComputerMoveClass {
     public static void isThisYourMove(JLabel whoseMoveIsNowLabel) { //this method checking that you win
         whoMoveIsNow = whoseMoveIsNowLabel;
         if(checkingYoursWinsed(yoursMovesMap)){ //if true your win if false time on the computer's move
-            if(getDrawGameMatch()){
+
+            /*if(getDrawGameMatch()){
                 whoseMoveIsNowLabel.setText("Draw - Remis !!!!");
                 return;
-            }
+            }*/
 
             for(Map.Entry<GameFild.TicTacToeButtons,Integer> button : GameFild.getButtonMap().entrySet()){
                     button.getKey().setEnabled(false);
@@ -31,8 +32,9 @@ public class LogicAndComputerMoveClass {
                 public void run() {
                     whoMoveIsNow.setText("Who move is now: "+"computer move");
                     try {
-                        Thread.sleep(2500);
+                        Thread.sleep(300);
                         if(isComputerMove(whoseMoveIsNowLabel)){
+                            drawVictoryLine("147");
                             Thread.currentThread().interrupt();
                             whoseMoveIsNowLabel.setText("COMPUTER ARE WINNERS - SORRY YOU LOUSE - next time will be better ;) ");
                         }else{
@@ -114,8 +116,39 @@ public class LogicAndComputerMoveClass {
         return getEndGameVariable();
     }
 
-    public static void victoryLine(){
+    public static void drawVictoryLine(String stringVictory){
+        int tabVictoy_sMoves[] = new int[stringVictory.length()];
+        for(int x = 0 ; x < stringVictory.length() ; x++){
+            tabVictoy_sMoves[x] = Integer.valueOf(String.valueOf(stringVictory.charAt(x)));
+        }
 
+        GameFild.TicTacToeButtons moveUser = null;
+
+        for(int victoryLineMoves: tabVictoy_sMoves) {
+            if (UserMoveClass.getSelectedFigure().equals("cross")) {
+                for (Map.Entry<GameFild.TicTacToeButtons, Integer> el : GameFild.getButtonMap().entrySet()) {
+                    if (el.getValue() == victoryLineMoves) {
+                        moveUser = el.getKey();
+                        moveUser.setEnabled(false);
+                        moveUser.setOpaque(false);
+                        moveUser.drawingCircleOrCross("line+"+UserMoveClass.getSelectedFigure());
+
+                    }
+                }
+
+            } else {
+
+                for (Map.Entry<GameFild.TicTacToeButtons, Integer> el : GameFild.getButtonMap().entrySet()) {
+                    if (el.getValue() == victoryLineMoves) {
+                        moveUser = el.getKey();
+                        moveUser.setEnabled(false);
+                        moveUser.setOpaque(false);
+                        moveUser.drawingCircleOrCross("line+"+UserMoveClass.getSelectedFigure());
+
+                    }
+                }
+            }
+        }
     }
 
     public static void drawingAllComputerMoves(int drawMove) {//this method draw all figure in game

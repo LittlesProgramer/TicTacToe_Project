@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.util.HashMap;
 import java.util.Map;
@@ -101,7 +102,15 @@ public class GameFild extends JFrame {
                 }else if(figure.equals("circle")){
                     g2.setColor(Color.GREEN);
                     g2.draw(elli2D);
+                }else if(figure.equals("line+cross")){
+                    g2.draw(new Line2D.Double(20,20,140,20));
+                    g2.draw(new Rectangle2D.Double(20,20,20,20));
+                    //repaint();
+                }else if(figure.equals("line+circle")){
+                    g2.draw(new Line2D.Double(20,20,140,20));
+                    g2.draw(new Rectangle2D.Double(20,20,20,20));
                 }
+
             }else{
                 return;
             }
@@ -109,6 +118,7 @@ public class GameFild extends JFrame {
 
         //according to this method choice is drawing circle or cross
         public void drawingCircleOrCross(String s){
+            System.out.println("s = "+s);
             figure = s;
             repaint();
         }

@@ -371,6 +371,24 @@ public class LogicAndComputerMoveClass {
             }else{
                 EndGame = false;
             }
+
+            if(horizontal1){
+                lineWinMoves = "123";
+            }else if(horizontal2){
+                lineWinMoves = "456";
+            }else if(horizontal3){
+                lineWinMoves = "789";
+            }else if(vertical1){
+                lineWinMoves = "147";
+            }else if(vertical2){
+                lineWinMoves = "258";
+            }else if(vertical3){
+                lineWinMoves = "369";
+            }else if(cross1){
+                lineWinMoves = "159";
+            }else if(cross2){
+                lineWinMoves = "357";
+            }
         }
         return EndGame;
     }

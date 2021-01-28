@@ -66,14 +66,24 @@ public class LogicAndComputerMoveClass {
             drawingAllComputerMoves(strongestMove);
             addCompInMap(strongestMove);
         }else if(computerMovesMap.size() == 1){
-            int blockedMove = checkingPlayerWinAndBlockedHisMove();
-            int strongest = getTheStrongestField();
-            if(blockedMove != 0){
-                drawingAllComputerMoves(blockedMove);
-                addCompInMap(blockedMove);
-            }else{
+            if(GameFild.TicTacToeButtons.getVariableDifficultLevel().equals("easy")){
+                int strongest = getTheStrongestField();
                 drawingAllComputerMoves(strongest);
                 addCompInMap(strongest);
+            }else if(GameFild.TicTacToeButtons.getVariableDifficultLevel().equals("middle")){
+                int strongest = getTheStrongestField();
+                drawingAllComputerMoves(strongest);
+                addCompInMap(strongest);
+            }else {
+                int blockedMove = checkingPlayerWinAndBlockedHisMove();
+                int strongest = getTheStrongestField();
+                if (blockedMove != 0) {
+                    drawingAllComputerMoves(blockedMove);
+                    addCompInMap(blockedMove);
+                } else {
+                    drawingAllComputerMoves(strongest);
+                    addCompInMap(strongest);
+                }
             }
         }else{
             //this three variable can use to set degree of difficulty example: if comWinMove = 0 or blockedMove = 0 or both = 0
@@ -81,30 +91,38 @@ public class LogicAndComputerMoveClass {
             int blockedMove = checkingPlayerWinAndBlockedHisMove();
             int strongest = getTheStrongestField();
 
-            if(compWinMove != 0){
+            if(GameFild.TicTacToeButtons.getVariableDifficultLevel().equals("easy")){
 
-                addCompInMap(compWinMove);
-                if(checkingYoursWinsed(computerMovesMap)){
+            }else if(GameFild.TicTacToeButtons.getVariableDifficultLevel().equals("middle")){
 
-                    drawingAllComputerMoves(compWinMove);
+            }else { //only draw difficult level
+                if (compWinMove != 0) {
 
-                    for(Map.Entry<GameFild.TicTacToeButtons,Integer> button : GameFild.getButtonMap().entrySet()){
-                        button.getKey().setEnabled(false);
-                        EndGame = true;
+                    addCompInMap(compWinMove);
+                    if (checkingYoursWinsed(computerMovesMap)) {
+
+                        drawingAllComputerMoves(compWinMove);
+
+                        for (Map.Entry<GameFild.TicTacToeButtons, Integer> button : GameFild.getButtonMap().entrySet()) {
+                            button.getKey().setEnabled(false);
+                            EndGame = true;
+                        }
+                        return getEndGameVariable();
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "cos nie tak");
                     }
-                    return getEndGameVariable();
+                } else {
+                    if (blockedMove != 0) {
 
-                }else{ JOptionPane.showMessageDialog(null,"cos nie tak");}
-            }else{
-                if(blockedMove != 0){
+                        drawingAllComputerMoves(blockedMove);
+                        addCompInMap(blockedMove);
 
-                    drawingAllComputerMoves(blockedMove);
-                    addCompInMap(blockedMove);
+                    } else {
 
-                }else{
-
-                    drawingAllComputerMoves(strongest);
-                    addCompInMap(strongest);
+                        drawingAllComputerMoves(strongest);
+                        addCompInMap(strongest);
+                    }
                 }
             }
         }

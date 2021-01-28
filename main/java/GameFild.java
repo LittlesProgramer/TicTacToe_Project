@@ -10,6 +10,7 @@ public class GameFild extends JFrame {
     private JComboBox<String> crossOrCircle = new JComboBox<String>(new String[]{"Cross","Circle"}); //choose figure
     private JComboBox<String> difficultLevel = new JComboBox<>(new String[]{"easy","middel","only draw"});
     private JButton startGame = new JButton("Start Game"); //start game button
+    private static String variableDifficultLevel = "";
 
     private JPanel panelCrossCircle = new JPanel(); //pannel including user option choosing circle or cross
     private JPanel panelButtons = new JPanel(); //panel containing 9 TicTacToe palying filds
@@ -29,6 +30,7 @@ public class GameFild extends JFrame {
         this.setLayout(new BorderLayout());
 
         this.add(panelCrossCircle,BorderLayout.NORTH);
+        panelCrossCircle.add(difficultLevel);
         panelCrossCircle.add(crossOrCircle);
         panelCrossCircle.add(startGame);
 
@@ -48,6 +50,14 @@ public class GameFild extends JFrame {
         //action for this button is choose circle or cross for user
         startGame.addActionListener((action)->{
 
+            if(difficultLevel.getItemAt(difficultLevel.getSelectedIndex()).equals("easy")){
+                variableDifficultLevel = "easy";
+            }else if(difficultLevel.getItemAt(difficultLevel.getSelectedIndex()).equals("middle")){
+                variableDifficultLevel = "middle";
+            }else{
+                variableDifficultLevel = "only draw";
+            }
+
             if(crossOrCircle.getItemAt(crossOrCircle.getSelectedIndex()).equals("Cross")){
                 UserMoveClass.setDoSelectedCrossOrCircle();
                 UserMoveClass.whatFigureIsSelected("cross");
@@ -56,6 +66,7 @@ public class GameFild extends JFrame {
                 UserMoveClass.whatFigureIsSelected("circle");
             }
 
+            difficultLevel.setEnabled(false);
             crossOrCircle.setEnabled(false);
             startGame.setEnabled(false);
 
@@ -75,7 +86,7 @@ public class GameFild extends JFrame {
     }
 
     //this is class TicTacToe which draw circle or cross according to the user's choice using the drawingCircleOrCross method
-    class TicTacToeButtons extends JButton{//this is Button field class
+    static class TicTacToeButtons extends JButton{//this is Button field class
         private int wid;
         private int hei;
 
@@ -194,5 +205,6 @@ public class GameFild extends JFrame {
             dim.setSize(getWidthButtonTicTacToe(),getHeightButtonTicTacToe());
             return dim;
         }
+        public static String getVariableDifficultLevel(){ return variableDifficultLevel; }
     }
 }

@@ -93,6 +93,25 @@ public class LogicAndComputerMoveClass {
 
             if(GameFild.TicTacToeButtons.getVariableDifficultLevel().equals("easy")){
 
+                if(compWinMove != 0){
+                    addCompInMap(compWinMove);
+                    if (checkingYoursWinsed(computerMovesMap)) {
+
+                        drawingAllComputerMoves(compWinMove);
+
+                        for (Map.Entry<GameFild.TicTacToeButtons, Integer> button : GameFild.getButtonMap().entrySet()) {
+                            button.getKey().setEnabled(false);
+                            EndGame = true;
+                        }
+                        return getEndGameVariable();
+
+                    }
+
+                }else{
+                    drawingAllComputerMoves(strongest);
+                    addCompInMap(strongest);
+                }
+
             }else if(GameFild.TicTacToeButtons.getVariableDifficultLevel().equals("middle")){
 
             }else { //only draw difficult level

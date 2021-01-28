@@ -149,6 +149,39 @@ public class LogicAndComputerMoveClass {
         return getEndGameVariable();
     }
 
+    public static void drawPlayerVictoryLine(String stringVictory){
+        int tabVictoy_sMoves[] = new int[stringVictory.length()];
+        for(int x = 0 ; x < stringVictory.length() ; x++){
+            tabVictoy_sMoves[x] = Integer.valueOf(String.valueOf(stringVictory.charAt(x)));
+        }
+
+        GameFild.TicTacToeButtons moveUser = null;
+
+        for(int victoryLineMoves: tabVictoy_sMoves) {
+            if (UserMoveClass.getSelectedFigure().equals("cross")) {
+                for (Map.Entry<GameFild.TicTacToeButtons, Integer> el : GameFild.getButtonMap().entrySet()) {
+                    if (el.getValue() == victoryLineMoves) {
+                        moveUser = el.getKey();
+                        moveUser.setEnabled(false);
+                        moveUser.setOpaque(false);
+                        moveUser.drawingCircleOrCross("line+"+"circle");
+                    }
+                }
+
+            } else {
+
+                for (Map.Entry<GameFild.TicTacToeButtons, Integer> el : GameFild.getButtonMap().entrySet()) {
+                    if (el.getValue() == victoryLineMoves) {
+                        moveUser = el.getKey();
+                        moveUser.setEnabled(false);
+                        moveUser.setOpaque(false);
+                        moveUser.drawingCircleOrCross("line+"+"cross");
+                    }
+                }
+            }
+        }
+    }
+
     public static void drawVictoryLine(String stringVictory){
         int tabVictoy_sMoves[] = new int[stringVictory.length()];
         for(int x = 0 ; x < stringVictory.length() ; x++){
@@ -165,7 +198,6 @@ public class LogicAndComputerMoveClass {
                         moveUser.setEnabled(false);
                         moveUser.setOpaque(false);
                         moveUser.drawingCircleOrCross("line+"+UserMoveClass.getSelectedFigure());
-
                     }
                 }
 
@@ -177,7 +209,6 @@ public class LogicAndComputerMoveClass {
                         moveUser.setEnabled(false);
                         moveUser.setOpaque(false);
                         moveUser.drawingCircleOrCross("line+"+UserMoveClass.getSelectedFigure());
-
                     }
                 }
             }

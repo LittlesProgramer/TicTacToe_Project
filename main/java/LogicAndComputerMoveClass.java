@@ -16,6 +16,7 @@ public class LogicAndComputerMoveClass {
         whoMoveIsNow = whoseMoveIsNowLabel;
         if(checkingYoursWinsed(yoursMovesMap)){ //if true your win if false time on the computer's move
 
+            drawPlayerVictoryLine(getLineWinMoves());
             for(Map.Entry<GameFild.TicTacToeButtons,Integer> button : GameFild.getButtonMap().entrySet()){
                     button.getKey().setEnabled(false);
                     whoseMoveIsNowLabel.setText("YOU ARE WINNERS - CONGRATULATIONS !!!");
@@ -113,6 +114,26 @@ public class LogicAndComputerMoveClass {
                 }
 
             }else if(GameFild.TicTacToeButtons.getVariableDifficultLevel().equals("middle")){
+                if(blockedMove != 0){
+                    addCompInMap(blockedMove);
+                    if (checkingYoursWinsed(computerMovesMap)) {
+
+                        drawingAllComputerMoves(compWinMove);
+
+                        for (Map.Entry<GameFild.TicTacToeButtons, Integer> button : GameFild.getButtonMap().entrySet()) {
+                            button.getKey().setEnabled(false);
+                            EndGame = true;
+                        }
+                        return getEndGameVariable();
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "cos nie tak");
+                    }
+
+                }else{
+                    drawingAllComputerMoves(strongest);
+                    addCompInMap(strongest);
+                }
 
             }else { //only draw difficult level
                 if (compWinMove != 0) {
@@ -131,7 +152,9 @@ public class LogicAndComputerMoveClass {
                     } else {
                         JOptionPane.showMessageDialog(null, "cos nie tak");
                     }
+
                 } else {
+
                     if (blockedMove != 0) {
 
                         drawingAllComputerMoves(blockedMove);
@@ -142,6 +165,7 @@ public class LogicAndComputerMoveClass {
                         drawingAllComputerMoves(strongest);
                         addCompInMap(strongest);
                     }
+
                 }
             }
         }

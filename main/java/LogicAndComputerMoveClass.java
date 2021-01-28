@@ -67,11 +67,8 @@ public class LogicAndComputerMoveClass {
             drawingAllComputerMoves(strongestMove);
             addCompInMap(strongestMove);
         }else if(computerMovesMap.size() == 1){
+
             if(GameFild.TicTacToeButtons.getVariableDifficultLevel().equals("easy")){
-                int strongest = getTheStrongestField();
-                drawingAllComputerMoves(strongest);
-                addCompInMap(strongest);
-            }else if(GameFild.TicTacToeButtons.getVariableDifficultLevel().equals("middle")){
                 int strongest = getTheStrongestField();
                 drawingAllComputerMoves(strongest);
                 addCompInMap(strongest);
@@ -86,6 +83,7 @@ public class LogicAndComputerMoveClass {
                     addCompInMap(strongest);
                 }
             }
+
         }else{
             //this three variable can use to set degree of difficulty example: if comWinMove = 0 or blockedMove = 0 or both = 0
             int compWinMove = computer_sWiningMove();
@@ -106,28 +104,6 @@ public class LogicAndComputerMoveClass {
                         }
                         return getEndGameVariable();
 
-                    }
-
-                }else{
-                    drawingAllComputerMoves(strongest);
-                    addCompInMap(strongest);
-                }
-
-            }else if(GameFild.TicTacToeButtons.getVariableDifficultLevel().equals("middle")){
-                if(blockedMove != 0){
-                    addCompInMap(blockedMove);
-                    if (checkingYoursWinsed(computerMovesMap)) {
-
-                        drawingAllComputerMoves(compWinMove);
-
-                        for (Map.Entry<GameFild.TicTacToeButtons, Integer> button : GameFild.getButtonMap().entrySet()) {
-                            button.getKey().setEnabled(false);
-                            EndGame = true;
-                        }
-                        return getEndGameVariable();
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "cos nie tak");
                     }
 
                 }else{

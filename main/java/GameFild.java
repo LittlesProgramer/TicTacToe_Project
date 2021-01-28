@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class GameFild extends JFrame {
     private JComboBox<String> crossOrCircle = new JComboBox<String>(new String[]{"Cross","Circle"}); //choose figure
-    private JComboBox<String> difficultLevel = new JComboBox<>(new String[]{"easy","middel","only draw"});
+    private JComboBox<String> difficultLevel = new JComboBox<>(new String[]{"easy","only draw"});
     private JButton startGame = new JButton("Start Game"); //start game button
     private static String variableDifficultLevel = "";
 
